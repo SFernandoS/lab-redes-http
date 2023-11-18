@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  nginx-http1:
+    image: nginx:latest
+    volumes:
+      - ./nginx-http1.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8081:8081"
+    networks:
+      - nginxdemo
+
+  nginx-http2:
+    image: nginx:latest
+    volumes:
+      - ./nginx-http2.conf:/etc/nginx/nginx.conf
+      - ./dummy.crt:/etc/nginx/ssl/dummy.crt
+      - ./dummy.key:/etc/nginx/ssl/dummy.key
+      - ./html:/usr/share/nginx/html
+    ports:
+      - "8082:8082"
+    networks:
+      - nginxdemo
+
+  nginx-http3:
+    build: .
+    volumes:
+      - ./nginx-http3.conf:/etc/nginx/nginx.conf
+      - ./dummy.crt:/etc/nginx/ssl/dummy.crt
+      - ./dummy.key:/etc/nginx/ssl/dummy.key
+      - ./html:/usr/share/nginx/html
+    ports:
+      - "8083:8083"
+    networks:
+      - nginxdemo
+
+networks:
+  nginxdemo:
+    driver: bridge
