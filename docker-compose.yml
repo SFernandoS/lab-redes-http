@@ -23,13 +23,14 @@ services:
       - nginxdemo
 
   nginx-http3:
-    image: ymuski/nginx-quic
+    image: patrikjuvonen/docker-nginx-http3
     volumes:
       - ./nginx-http3.conf:/etc/nginx/nginx.conf
       - ./dummy.crt:/etc/nginx/ssl/dummy.crt
       - ./dummy.key:/etc/nginx/ssl/dummy.key
       - ./html:/usr/share/nginx/htm
     ports:
+      - "8083:8083"
       - "8083:8083/udp"
     networks:
       - nginxdemo
