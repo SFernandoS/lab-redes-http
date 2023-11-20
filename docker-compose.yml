@@ -5,6 +5,7 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx-http1.conf:/etc/nginx/nginx.conf
+      - ./html:/usr/share/nginx/html
     ports:
       - "8081:8081"
     networks:
@@ -28,7 +29,7 @@ services:
       - ./nginx-http3.conf:/etc/nginx/nginx.conf
       - ./dummy.crt:/etc/nginx/ssl/dummy.crt
       - ./dummy.key:/etc/nginx/ssl/dummy.key
-      - ./html:/usr/share/nginx/htm
+      - ./html:/usr/share/nginx/html
     ports:
       - "8083:8083"
       - "8083:8083/udp"
